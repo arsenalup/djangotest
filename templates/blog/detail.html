@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <article class="post post-{{ post.pk }}">
+        <header class="entry-header">
+            <h1 class="entry-title">{{ post.title }}</h1>
+            <div class="entry-meta">
+                <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date"
+                                                          datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+                <span class="post-author"><a href="#">{{ post.author }}</a></span>
+                <span class="comments-link">
+                    <a href="{{ post.get_absolute_url }}#comment-area">{{ post.comment_set.count }} 评论</a></span>
+                <span class="views-count"><a href="{{ post.get_absolute_url }}">{{ post.views}}阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+            {{ post.body|safe }}
+        </div>
+    </article>
+    <section class="comment-area">
+        <!--高速版-->
+        <div id="SOHUCS" ></div>
+        <script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+        <script type="text/javascript">
+        window.changyan.api.config({
+        appid: 'cyt3QosPu',
+        conf: 'prod_4ba5a43b79653613c199b8b0e1a50c7f'
+        });
+        </script>
+            </section>
+{% endblock main %}
+{% block toc %}
+    <div class="widget widget-content">
+        <h3 class="widget-title">文章目录</h3>
+        {{ post.toc|safe }}
+    </div>
+{% endblock toc %}
