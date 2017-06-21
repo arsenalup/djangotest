@@ -137,7 +137,7 @@ def search(request):
     q = request.GET.get('q')
     error_msg = ''
     if not q:
-        error_msg = '请输入关键字'
+        error_msg = ' keywords'
         return render(request, 'blog/index.html', {'error_msg': error_msg})
 
     post_list = Post.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
